@@ -1,4 +1,4 @@
-package grails.test.domain.class.constraints
+package demo
 
 class UrlMappings {
 

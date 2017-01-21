@@ -2,7 +2,7 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: grails.test.domain.class.constraints
+        defaultPackage: demo
     spring:
         transactionManagement:
             proxies: false
