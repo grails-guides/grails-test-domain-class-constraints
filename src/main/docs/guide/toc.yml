@@ -1,8 +1,10 @@
-gettingStarted: 
+gettingStarted:
   title: Getting Started
   requirements: What you will need
   howto: How to complete the guide
 writingTheApp:
   title: Writing the Application
-runningTheApp:
-  title: Running the Application
+  domainClass: Domain Class
+  unitTests: Unit Tests
+testingTheApp:
+  title: Testing the Application
