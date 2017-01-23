@@ -14,8 +14,12 @@ class HotelSpec extends Specification {
 
     // tag::nameTests[]
     void "test name cannot be null"() {
-        expect:
-        !new Hotel(name: null).validate(['name'])
+        when:
+        def hotel = new Hotel(name: null)
+
+        then:
+        !hotel.validate(['name'])
+        hotel.errors['name'].code == 'nullable'
     }
 
     void "test name cannot be blank"() {
@@ -27,9 +31,11 @@ class HotelSpec extends Specification {
         when: 'for a string of 256 characters'
         String str = ''
         256.times { str += 'a' }
+        def hotel = new Hotel(name: str)
 
         then: 'name validation fails'
-        !new Hotel(name: str).validate(['name'])
+        !hotel.validate(['name'])
+        hotel.errors['name'].code == 'maxSize.exceeded'
 
         when: 'for a string of 256 characters'
         str = ''
@@ -48,9 +54,11 @@ class HotelSpec extends Specification {
         String str = ''
         (256 - (urlprefifx.size() + urlsufifx.size())).times { str += 'a' }
         str = urlprefifx + str + urlsufifx
+        def hotel = new Hotel(url: str)
 
         then: 'url validation fails'
-        !new Hotel(url: str).validate(['url'])
+        !hotel.validate(['url'])
+        hotel.errors['url'].code == 'maxSize.exceeded'
 
         when: 'for a string of 256 characters'
         str = ''
@@ -61,38 +69,40 @@ class HotelSpec extends Specification {
         new Hotel(url: str).validate(['url'])
     }
 
-    @Unroll('Hotel.validate() with url: #value should have returned #expected')
+    @Unroll('Hotel.validate() with url: #value should have returned #expected with errorCode: #expectedErrorCode')
     void "test url validation"() {
         when:
-        def result = new Hotel(url: value).validate(['url'])
+        def hotel = new Hotel(url: value)
 
         then:
-        expected == result
+        expected == hotel.validate(['url'])
+        hotel.errors['url']?.code == expectedErrorCode
 
         where:
-        value                  || expected
-        null                   |  true
-        ''                     |  true
-        'http://hilton.com'    |  true
-        'hilton'               |  false
+        value                  | expected | expectedErrorCode
+        null                   | true     | null
+        ''                     | true     | null
+        'http://hilton.com'    | true     | null
+        'hilton'               | false    | 'url.invalid'
     }
     // end::urlTests[]
 
-    @Unroll('Hotel.validate() with email: #value should have returned #expected')
     // tag::emailTests[]
+    @Unroll('Hotel.validate() with email: #value should have returned #expected with errorCode: #expectedErrorCode')
     void "test email validation"() {
         when:
-        def result = new Hotel(email: value).validate(['email'])
+        def hotel = new Hotel(email: value)
 
         then:
-        expected == result
+        expected == hotel.validate(['email'])
+        hotel.errors['email']?.code == expectedErrorCode
 
         where:
-        value                  || expected
-        null                   |  true
-        ''                     |  true
-        'contact@hilton.com'   |  true
-        'hilton'               |  false
+        value                  | expected | expectedErrorCode
+        null                   |  true    | null
+        ''                     |  true    | null
+        'contact@hilton.com'   |  true    | null
+        'hilton'               |  false   | 'email.invalid'
     }
     // end::emailTests[]
 
@@ -118,46 +128,48 @@ class HotelSpec extends Specification {
     }
     // end::aboutTests[]
 
-    @Unroll('Hotel.validate() with latitude: #value should have returned #expected')
     // tag::latitudeAndLongitudeTests[]
+    @Unroll('Hotel.validate() with latitude: #value should have returned #expected with errorCode: #expectedErrorCode')
     void "test latitude validation"() {
         when:
-        def result = new Hotel(latitude: value).validate(['latitude'])
+        def hotel = new Hotel(latitude: value)
 
         then:
-        expected == result
+        expected == hotel.validate(['latitude'])
+        hotel.errors['latitude']?.code == expectedErrorCode
 
         where:
-        value                  || expected
-        null                   |  true
-        0                      |  true
-        0.5                    |  true
-        90                     |  true
-        90.5                   |  false
-        -90                    |  true
-        -180                   |  false
-        180                    |  false
+        value                  | expected | expectedErrorCode
+        null                   | true     | null
+        0                      | true     | null
+        0.5                    | true     | null
+        90                     | true     | null
+        90.5                   | false    | 'range.toobig'
+        -90                    | true     | null
+        -180                   | false    | 'range.toosmall'
+        180                    | false    | 'range.toobig'
     }
 
-    @Unroll('Hotel.longitude() with latitude: #value should have returned #expected')
+    @Unroll('Hotel.longitude() with latitude: #value should have returned #expected with error code: #expectedErrorCode')
     void "test longitude validation"() {
         when:
-        def result = new Hotel(longitude: value).validate(['longitude'])
+        def hotel = new Hotel(longitude: value)
 
         then:
-        expected == result
+        expected == hotel.validate(['longitude'])
+        hotel.errors['longitude']?.code == expectedErrorCode
 
         where:
-        value                  || expected
-        null                   |  true
-        0                      |  true
-        90                     |  true
-        90.1                   |  true
-        -90                    |  true
-        -180                   |  true
-        180                    |  true
-        180.1                  |  false
-        -180.1                 |  false
+        value                  | expected | expectedErrorCode
+        null                   | true     | null
+        0                      | true     | null
+        90                     | true     | null
+        90.1                   | true     | null
+        -90                    | true     | null
+        -180                   | true     | null
+        180                    | true     | null
+        180.1                  | false    | 'range.toobig'
+        -180.1                 | false    | 'range.toosmall'
     }
     // end::latitudeAndLongitudeTests[]
 }
