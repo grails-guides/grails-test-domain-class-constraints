@@ -6,7 +6,7 @@ Please, note the annotation `@TestFor`. We indicate we are testing a Grails arti
 [source,groovy]
 ./src/test/groovy/demo/HotelSpec.groovy
 ----
-include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0, lines=10..11]
+include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0,tags=testForTests]
 ----
 
 This is the key take-away of this guide:
@@ -24,7 +24,7 @@ want this property to be required and with a max length of 255 characters.
 [source,groovy]
 ./src/test/groovy/demo/HotelSpec.groovy
 ----
-include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0, lines=13..37]
+include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0,tags=nameTests]
 ----
 
 ### Url property constraints testing
@@ -35,7 +35,7 @@ want this property to be either a valid url or a null or blank value.
 [source,groovy]
 ./src/test/groovy/demo/HotelSpec.groovy
 ----
-include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0, lines=39..74]
+include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0,tags=urlTests]
 ----
 
 ### Email property constraints testing
@@ -44,7 +44,7 @@ We want `email` to be either a valid email or a null or blank value.
 [source,groovy]
 ./src/test/groovy/demo/HotelSpec.groovy
 ----
-include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0, lines=75..89]
+include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0,tags=emailTests]
 ----
 
 NOTE: Email validator ensures it has less than 255 characters
@@ -57,7 +57,7 @@ to 255 characters. We used the `mapping` block in our domain class to indicate t
 [source,javascript]
 ./grails-app/domain/demo/Hotel.groovy
 ----
-include::{sourceDir}/grails-app/domain/demo/Hotel.groovy[indent=0,lines=38..40]
+include::{sourceDir}/grails-app/domain/demo/Hotel.groovy[indent=0,tags=hotelMapping]
 ----
 
 These are the tests to validate `about` constraints.
@@ -65,7 +65,7 @@ These are the tests to validate `about` constraints.
 [source,groovy]
 ./src/test/groovy/demo/HotelSpec.groovy
 ----
-include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0, lines=91..109]
+include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0,tags=aboutTests]
 ----
 
 ### Latitude and longitude properties constraints testing
@@ -91,7 +91,7 @@ Instead we are using a https://docs.grails.org/latest/ref/Constraints/validator.
 [source,javascript]
 ./grails-app/domain/demo/Hotel.groovy
 ----
-include::{sourceDir}/grails-app/domain/demo/Hotel.groovy[indent=0,lines=16..25]
+include::{sourceDir}/grails-app/domain/demo/Hotel.groovy[indent=0,tags=latitudeCustomValidator]
 ----
 
 These are the tests to validate `latitude` and `longitude` constraints.
@@ -99,5 +99,5 @@ These are the tests to validate `latitude` and `longitude` constraints.
 [source,groovy]
 ./src/test/groovy/demo/HotelSpec.groovy
 ----
-include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0, lines=111..150]
+include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0,tags=latitudeAndLongitudeTests]
 ----

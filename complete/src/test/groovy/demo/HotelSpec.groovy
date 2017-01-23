@@ -7,9 +7,12 @@ import spock.lang.Unroll
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
+// tag::testForTests[]
 @TestFor(Hotel)
 class HotelSpec extends Specification {
+// end::testForTests[]
 
+    // tag::nameTests[]
     void "test name cannot be null"() {
         expect:
         !new Hotel(name: null).validate(['name'])
@@ -35,7 +38,9 @@ class HotelSpec extends Specification {
         then: 'name validation passes'
         new Hotel(name: str).validate(['name'])
     }
+    // end::nameTests[]
 
+    // tag::urlTests[]
     void "test url can have a maximum of 255 characters"() {
         when: 'for a string of 256 characters'
         String urlprefifx = 'http://'
@@ -71,8 +76,10 @@ class HotelSpec extends Specification {
         'http://hilton.com'    |  true
         'hilton'               |  false
     }
+    // end::urlTests[]
 
     @Unroll('Hotel.validate() with email: #value should have returned #expected')
+    // tag::emailTests[]
     void "test email validation"() {
         when:
         def result = new Hotel(email: value).validate(['email'])
@@ -87,7 +94,9 @@ class HotelSpec extends Specification {
         'contact@hilton.com'   |  true
         'hilton'               |  false
     }
+    // end::emailTests[]
 
+    // tag::aboutTests[]
     void "test about can be null"() {
         expect:
         new Hotel(about: null).validate(['about'])
@@ -107,8 +116,10 @@ class HotelSpec extends Specification {
         then: 'about validation passes'
         new Hotel(about: str).validate(['about'])
     }
+    // end::aboutTests[]
 
     @Unroll('Hotel.validate() with latitude: #value should have returned #expected')
+    // tag::latitudeAndLongitudeTests[]
     void "test latitude validation"() {
         when:
         def result = new Hotel(latitude: value).validate(['latitude'])
@@ -148,4 +159,5 @@ class HotelSpec extends Specification {
         180.1                  |  false
         -180.1                 |  false
     }
+    // end::latitudeAndLongitudeTests[]
 }
