@@ -13,6 +13,7 @@ class Hotel {
         url nullable: true, url: true, maxSize: 255
         email nullable: true, email: true
         about nullable: true
+        // tag::latitudeCustomValidator[]
         latitude nullable: true, validator: { val, obj, errors ->
             if ( val == null ) {
                 return true
@@ -27,6 +28,7 @@ class Hotel {
             }
             true
         }
+        // end::latitudeCustomValidator[]
         longitude nullable: true, validator: { val, obj, errors ->
             if ( val == null ) {
                 return true
@@ -43,7 +45,9 @@ class Hotel {
         }
     }
 
+    // tag::hotelMapping[]
     static mapping = {
         about type: 'text'
     }
+    // end::hotelMapping[]
 }
