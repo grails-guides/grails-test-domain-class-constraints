@@ -8,3 +8,5 @@ writingTheApp:
   unitTests: Unit Tests
 testingTheApp:
   title: Testing the Application
+helpWithGrails:
+  title: Do you need help with Grails?
