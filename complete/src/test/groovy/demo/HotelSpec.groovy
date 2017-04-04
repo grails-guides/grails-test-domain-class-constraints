@@ -29,8 +29,7 @@ class HotelSpec extends Specification {
 
     void "test name can have a maximum of 255 characters"() {
         when: 'for a string of 256 characters'
-        String str = ''
-        256.times { str += 'a' }
+        String str = 'a'*256
         def hotel = new Hotel(name: str)
 
         then: 'name validation fails'
@@ -38,8 +37,7 @@ class HotelSpec extends Specification {
         hotel.errors['name'].code == 'maxSize.exceeded'
 
         when: 'for a string of 256 characters'
-        str = ''
-        255.times { str += 'a' }
+        str = 'a'*255
 
         then: 'name validation passes'
         new Hotel(name: str).validate(['name'])
@@ -51,8 +49,7 @@ class HotelSpec extends Specification {
         when: 'for a string of 256 characters'
         String urlprefifx = 'http://'
         String urlsufifx = '.com'
-        String str = ''
-        (256 - (urlprefifx.size() + urlsufifx.size())).times { str += 'a' }
+        String str = 'a'*(256 - (urlprefifx.size() + urlsufifx.size())) 
         str = urlprefifx + str + urlsufifx
         def hotel = new Hotel(url: str)
 
@@ -61,10 +58,8 @@ class HotelSpec extends Specification {
         hotel.errors['url'].code == 'maxSize.exceeded'
 
         when: 'for a string of 256 characters'
-        str = ''
-        (255 - (urlprefifx.size() + urlsufifx.size())).times { str += 'a' }
-        str = urlprefifx + str + urlsufifx
-
+        str = "${urlprefifx}${'a'*(255 - (urlprefifx.size() + urlsufifx.size()))}${urlsufifx}"
+        
         then: 'url validation passes'
         new Hotel(url: str).validate(['url'])
     }
@@ -120,8 +115,7 @@ class HotelSpec extends Specification {
     void "test about can have a more than 255 characters"() {
 
         when: 'for a string of 256 characters'
-        String str = ''
-        256.times { str += 'a' }
+        String str = 'a'*256
 
         then: 'about validation passes'
         new Hotel(about: str).validate(['about'])
