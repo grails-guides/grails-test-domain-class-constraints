@@ -14,9 +14,6 @@ class HotelSpec extends Specification {
 
     // tag::nameTests[]
     void "test name cannot be null"() {
-        given:
-        domain.clearErrors()
-
         when:
         domain.name = null
 
@@ -26,9 +23,6 @@ class HotelSpec extends Specification {
     }
 
     void "test name cannot be blank"() {
-        given:
-        domain.clearErrors()
-
         when:
         domain.name = ''
 
@@ -37,9 +31,6 @@ class HotelSpec extends Specification {
     }
 
     void "test name can have a maximum of 255 characters"() {
-        given:
-        domain.clearErrors()
-
         when: 'for a string of 256 characters'
         String str = 'a'*256
         domain.name = str
@@ -59,9 +50,6 @@ class HotelSpec extends Specification {
 
     // tag::urlTests[]
     void "test url can have a maximum of 255 characters"() {
-        given:
-        domain.clearErrors()
-
         when: 'for a string of 256 characters'
         String urlprefifx = 'http://'
         String urlsufifx = '.com'
@@ -83,9 +71,6 @@ class HotelSpec extends Specification {
 
     @Unroll('Hotel.validate() with url: #value should have returned #expected with errorCode: #expectedErrorCode')
     void "test url validation"() {
-        given:
-        domain.clearErrors()
-
         when:
         domain.url = value
 
@@ -105,9 +90,6 @@ class HotelSpec extends Specification {
     // tag::emailTests[]
     @Unroll('Hotel.validate() with email: #value should have returned #expected with errorCode: #expectedErrorCode')
     void "test email validation"() {
-        given:
-        domain.clearErrors()
-
         when:
         domain.email = value
 
@@ -126,9 +108,6 @@ class HotelSpec extends Specification {
 
     // tag::aboutTests[]
     void "test about can be null"() {
-        given:
-        domain.clearErrors()
-
         when:
         domain.about = null
 
@@ -145,9 +124,6 @@ class HotelSpec extends Specification {
     }
 
     void "test about can have a more than 255 characters"() {
-        given:
-        domain.clearErrors()
-
         when: 'for a string of 256 characters'
         String str = 'a'*256
         domain.about = str
@@ -160,9 +136,6 @@ class HotelSpec extends Specification {
     // tag::latitudeAndLongitudeTests[]
     @Unroll('Hotel.validate() with latitude: #value should have returned #expected with errorCode: #expectedErrorCode')
     void "test latitude validation"() {
-        given:
-        domain.clearErrors()
-
         when:
         domain.latitude = value
 
@@ -184,9 +157,6 @@ class HotelSpec extends Specification {
 
     @Unroll('Hotel.longitude() with latitude: #value should have returned #expected with error code: #expectedErrorCode')
     void "test longitude validation"() {
-        given:
-        domain.clearErrors()
-
         when:
         domain.longitude = value
 
