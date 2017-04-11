@@ -9,7 +9,7 @@ class Hotel {
     BigDecimal longitude
 
     static constraints = {
-        name maxSize: 255
+        name blank: false, maxSize: 255
         url nullable: true, url: true, maxSize: 255
         email nullable: true, email: true
         about nullable: true

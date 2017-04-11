@@ -14,64 +14,84 @@ class HotelSpec extends Specification {
 
     // tag::nameTests[]
     void "test name cannot be null"() {
+        given:
+        domain.clearErrors()
+
         when:
-        def hotel = new Hotel(name: null)
+        domain.name = null
 
         then:
-        !hotel.validate(['name'])
-        hotel.errors['name'].code == 'nullable'
+        !domain.validate(['name'])
+        domain.errors['name'].code == 'nullable'
     }
 
     void "test name cannot be blank"() {
-        expect:
-        !new Hotel(name: '').validate(['name'])
+        given:
+        domain.clearErrors()
+
+        when:
+        domain.name = ''
+
+        then:
+        !domain.validate(['name'])
     }
 
     void "test name can have a maximum of 255 characters"() {
+        given:
+        domain.clearErrors()
+
         when: 'for a string of 256 characters'
         String str = 'a'*256
-        def hotel = new Hotel(name: str)
+        domain.name = str
 
         then: 'name validation fails'
-        !hotel.validate(['name'])
-        hotel.errors['name'].code == 'maxSize.exceeded'
+        !domain.validate(['name'])
+        domain.errors['name'].code == 'maxSize.exceeded'
 
         when: 'for a string of 256 characters'
         str = 'a'*255
+        domain.name = str
 
         then: 'name validation passes'
-        new Hotel(name: str).validate(['name'])
+        domain.validate(['name'])
     }
     // end::nameTests[]
 
     // tag::urlTests[]
     void "test url can have a maximum of 255 characters"() {
+        given:
+        domain.clearErrors()
+
         when: 'for a string of 256 characters'
         String urlprefifx = 'http://'
         String urlsufifx = '.com'
         String str = 'a'*(256 - (urlprefifx.size() + urlsufifx.size())) 
         str = urlprefifx + str + urlsufifx
-        def hotel = new Hotel(url: str)
+        domain.url = str
 
         then: 'url validation fails'
-        !hotel.validate(['url'])
-        hotel.errors['url'].code == 'maxSize.exceeded'
+        !domain.validate(['url'])
+        domain.errors['url'].code == 'maxSize.exceeded'
 
         when: 'for a string of 256 characters'
         str = "${urlprefifx}${'a'*(255 - (urlprefifx.size() + urlsufifx.size()))}${urlsufifx}"
+        domain.url = str
         
         then: 'url validation passes'
-        new Hotel(url: str).validate(['url'])
+        domain.validate(['url'])
     }
 
     @Unroll('Hotel.validate() with url: #value should have returned #expected with errorCode: #expectedErrorCode')
     void "test url validation"() {
+        given:
+        domain.clearErrors()
+
         when:
-        def hotel = new Hotel(url: value)
+        domain.url = value
 
         then:
-        expected == hotel.validate(['url'])
-        hotel.errors['url']?.code == expectedErrorCode
+        expected == domain.validate(['url'])
+        domain.errors['url']?.code == expectedErrorCode
 
         where:
         value                  | expected | expectedErrorCode
@@ -85,12 +105,15 @@ class HotelSpec extends Specification {
     // tag::emailTests[]
     @Unroll('Hotel.validate() with email: #value should have returned #expected with errorCode: #expectedErrorCode')
     void "test email validation"() {
+        given:
+        domain.clearErrors()
+
         when:
-        def hotel = new Hotel(email: value)
+        domain.email = value
 
         then:
-        expected == hotel.validate(['email'])
-        hotel.errors['email']?.code == expectedErrorCode
+        expected == domain.validate(['email'])
+        domain.errors['email']?.code == expectedErrorCode
 
         where:
         value                  | expected | expectedErrorCode
@@ -103,34 +126,49 @@ class HotelSpec extends Specification {
 
     // tag::aboutTests[]
     void "test about can be null"() {
-        expect:
-        new Hotel(about: null).validate(['about'])
+        given:
+        domain.clearErrors()
+
+        when:
+        domain.about = null
+
+        then:
+        domain.validate(['about'])
     }
 
     void "test about can be blank"() {
-        expect:
-        new Hotel(about: '').validate(['about'])
+        when:
+        domain.about = ''
+
+        then:
+        domain.validate(['about'])
     }
 
     void "test about can have a more than 255 characters"() {
+        given:
+        domain.clearErrors()
 
         when: 'for a string of 256 characters'
         String str = 'a'*256
+        domain.about = str
 
         then: 'about validation passes'
-        new Hotel(about: str).validate(['about'])
+        domain.validate(['about'])
     }
     // end::aboutTests[]
 
     // tag::latitudeAndLongitudeTests[]
     @Unroll('Hotel.validate() with latitude: #value should have returned #expected with errorCode: #expectedErrorCode')
     void "test latitude validation"() {
+        given:
+        domain.clearErrors()
+
         when:
-        def hotel = new Hotel(latitude: value)
+        domain.latitude = value
 
         then:
-        expected == hotel.validate(['latitude'])
-        hotel.errors['latitude']?.code == expectedErrorCode
+        expected == domain.validate(['latitude'])
+        domain.errors['latitude']?.code == expectedErrorCode
 
         where:
         value                  | expected | expectedErrorCode
@@ -146,12 +184,15 @@ class HotelSpec extends Specification {
 
     @Unroll('Hotel.longitude() with latitude: #value should have returned #expected with error code: #expectedErrorCode')
     void "test longitude validation"() {
+        given:
+        domain.clearErrors()
+
         when:
-        def hotel = new Hotel(longitude: value)
+        domain.longitude = value
 
         then:
-        expected == hotel.validate(['longitude'])
-        hotel.errors['longitude']?.code == expectedErrorCode
+        expected == domain.validate(['longitude'])
+        domain.errors['longitude']?.code == expectedErrorCode
 
         where:
         value                  | expected | expectedErrorCode
