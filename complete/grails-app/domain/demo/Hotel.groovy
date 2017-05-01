@@ -1,5 +1,6 @@
 package demo
 
+@SuppressWarnings('DuplicateNumberLiteral')
 class Hotel {
     String name
     String url

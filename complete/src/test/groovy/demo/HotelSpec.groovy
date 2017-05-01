@@ -8,12 +8,13 @@ import spock.lang.Unroll
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 // tag::testForTests[]
+@SuppressWarnings(['MethodName', 'DuplicateNumberLiteral', 'DuplicateListLiteral', 'LineLength'])
 @TestFor(Hotel)
 class HotelSpec extends Specification {
 // end::testForTests[]
 
     // tag::nameTests[]
-    void "test name cannot be null"() {
+    void 'test name cannot be null'() {
         when:
         domain.name = null
 
@@ -22,7 +23,7 @@ class HotelSpec extends Specification {
         domain.errors['name'].code == 'nullable'
     }
 
-    void "test name cannot be blank"() {
+    void 'test name cannot be blank'() {
         when:
         domain.name = ''
 
@@ -30,9 +31,9 @@ class HotelSpec extends Specification {
         !domain.validate(['name'])
     }
 
-    void "test name can have a maximum of 255 characters"() {
+    void 'test name can have a maximum of 255 characters'() {
         when: 'for a string of 256 characters'
-        String str = 'a'*256
+        String str = 'a' * 256
         domain.name = str
 
         then: 'name validation fails'
@@ -40,7 +41,7 @@ class HotelSpec extends Specification {
         domain.errors['name'].code == 'maxSize.exceeded'
 
         when: 'for a string of 256 characters'
-        str = 'a'*255
+        str = 'a' * 255
         domain.name = str
 
         then: 'name validation passes'
@@ -49,11 +50,11 @@ class HotelSpec extends Specification {
     // end::nameTests[]
 
     // tag::urlTests[]
-    void "test url can have a maximum of 255 characters"() {
+    void 'test url can have a maximum of 255 characters'() {
         when: 'for a string of 256 characters'
         String urlprefifx = 'http://'
         String urlsufifx = '.com'
-        String str = 'a'*(256 - (urlprefifx.size() + urlsufifx.size())) 
+        String str = 'a' * (256 - (urlprefifx.size() + urlsufifx.size()))
         str = urlprefifx + str + urlsufifx
         domain.url = str
 
@@ -62,9 +63,8 @@ class HotelSpec extends Specification {
         domain.errors['url'].code == 'maxSize.exceeded'
 
         when: 'for a string of 256 characters'
-        str = "${urlprefifx}${'a'*(255 - (urlprefifx.size() + urlsufifx.size()))}${urlsufifx}"
+        str = "${urlprefifx}${'a' * (255 - (urlprefifx.size() + urlsufifx.size()))}${urlsufifx}"
         domain.url = str
-        
         then: 'url validation passes'
         domain.validate(['url'])
     }
@@ -107,7 +107,7 @@ class HotelSpec extends Specification {
     // end::emailTests[]
 
     // tag::aboutTests[]
-    void "test about can be null"() {
+    void 'test about can be null'() {
         when:
         domain.about = null
 
@@ -115,7 +115,7 @@ class HotelSpec extends Specification {
         domain.validate(['about'])
     }
 
-    void "test about can be blank"() {
+    void 'test about can be blank'() {
         when:
         domain.about = ''
 
@@ -123,9 +123,9 @@ class HotelSpec extends Specification {
         domain.validate(['about'])
     }
 
-    void "test about can have a more than 255 characters"() {
+    void 'test about can have a more than 255 characters'() {
         when: 'for a string of 256 characters'
-        String str = 'a'*256
+        String str = 'a' * 256
         domain.about = str
 
         then: 'about validation passes'
@@ -135,7 +135,7 @@ class HotelSpec extends Specification {
 
     // tag::latitudeAndLongitudeTests[]
     @Unroll('Hotel.validate() with latitude: #value should have returned #expected with errorCode: #expectedErrorCode')
-    void "test latitude validation"() {
+    void 'test latitude validation'() {
         when:
         domain.latitude = value
 
@@ -156,7 +156,7 @@ class HotelSpec extends Specification {
     }
 
     @Unroll('Hotel.longitude() with latitude: #value should have returned #expected with error code: #expectedErrorCode')
-    void "test longitude validation"() {
+    void 'test longitude validation'() {
         when:
         domain.longitude = value
 
