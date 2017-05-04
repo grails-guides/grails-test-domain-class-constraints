@@ -49,6 +49,22 @@ include::{sourceDir}/src/test/groovy/demo/HotelSpec.groovy[indent=0,tags=emailTe
 
 NOTE: Email validator ensures it has less than 255 characters
 
+### Email Unique constraint testing
+
+We have added a `unique` constraint to the Hotel's email address.
+
+____
+Unique: It constrains a property as unique at the database level. Unique is a persistent call and will query the database.
+____
+
+You can test a unique constraint with such a test:
+
+[source,groovy]
+./src/test/groovy/demo/HotelEmailUniqueConstraintSpec.groovy
+----
+include::{sourceDir}/src/test/groovy/demo/HotelEmailUniqueConstraintSpec.groovy[]
+----
+
 ### About property constraints testing
 
 We want `about` to be a null, blank or a block of text. We don't want `about` to be constrained

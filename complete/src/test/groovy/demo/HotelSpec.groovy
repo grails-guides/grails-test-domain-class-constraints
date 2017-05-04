@@ -7,8 +7,8 @@ import spock.lang.Unroll
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-// tag::testForTests[]
 @SuppressWarnings(['MethodName', 'DuplicateNumberLiteral', 'DuplicateListLiteral', 'LineLength'])
+// tag::testForTests[]
 @TestFor(Hotel)
 class HotelSpec extends Specification {
 // end::testForTests[]
