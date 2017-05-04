@@ -12,7 +12,7 @@ class Hotel {
     static constraints = {
         name blank: false, maxSize: 255
         url nullable: true, url: true, maxSize: 255
-        email nullable: true, email: true
+        email nullable: true, email: true, unique: true
         about nullable: true
         // tag::latitudeCustomValidator[]
         latitude nullable: true, validator: { val, obj, errors ->
