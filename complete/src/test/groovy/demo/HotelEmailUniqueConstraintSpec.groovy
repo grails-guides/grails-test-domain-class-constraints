@@ -10,7 +10,6 @@ class HotelEmailUniqueConstraintSpec extends HibernateSpec {
     def "hotel's email unique constraint"() {
 
         when: 'You instantiate a hotel with name and an email address which has been never used before'
-        int initialCount = Hotel.count()
         def hotel = new Hotel(name: 'Hotel Transilvania', email: 'info@hoteltransilvania.com')
 
         then: 'hotel is valid instance'
@@ -20,7 +19,7 @@ class HotelEmailUniqueConstraintSpec extends HibernateSpec {
         hotel.save()
 
         and: 'there is one additional Hotel'
-        (initialCount + 1) == Hotel.count()
+        Hotel.count() == old(Hotel.count()) + 1
 
         when: 'instanting a different hotel with the same email address'
         def hilton = new Hotel(name: 'Hilton Hotel', email: 'info@hoteltransilvania.com')
@@ -35,6 +34,6 @@ class HotelEmailUniqueConstraintSpec extends HibernateSpec {
         !hilton.save()
 
         and: 'no hotel has been added'
-        (initialCount + 1) == Hotel.count()
+        Hotel.count() == old(Hotel.count())
     }
 }
