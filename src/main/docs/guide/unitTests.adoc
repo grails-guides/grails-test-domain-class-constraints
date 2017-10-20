@@ -1,7 +1,7 @@
 
 We want to http://docs.grails.org/latest/guide/testing.html[unit test] our validation constraints.
 
-Please, note the annotation `@TestFor`. We indicate we are testing a Grails artifact; a domain class.
+Implement the `DomainUnitTest` trait. It indicates we are testing a Grails artifact; a domain class.
 
 [source,groovy]
 ./src/test/groovy/demo/HotelSpec.groovy
