@@ -71,7 +71,7 @@ assets {
 }
 
 codenarc {
-    toolVersion = '0.27.0'
+    toolVersion = '1.2.1'
     configFile = file("${project.projectDir}/config/codenarc/rules.groovy")
     reportFormat = 'html'
 }
