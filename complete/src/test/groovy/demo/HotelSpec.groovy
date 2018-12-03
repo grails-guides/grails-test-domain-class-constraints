@@ -6,9 +6,6 @@ import spock.lang.Subject
 import spock.lang.Ignore
 import grails.testing.gorm.DomainUnitTest
 
-/**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
- */
 @SuppressWarnings(['MethodName', 'DuplicateNumberLiteral', 'DuplicateListLiteral', 'LineLength'])
 // tag::testForTests[]
 class HotelSpec extends Specification implements DomainUnitTest<Hotel> {
