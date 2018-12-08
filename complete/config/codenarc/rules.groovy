@@ -266,12 +266,12 @@ ruleset {
     JUnitFailWithoutMessage 
     JUnitLostTest 
     JUnitPublicField 
-    JUnitPublicNonTestMethod 
-    JUnitPublicProperty 
+    //JUnitPublicNonTestMethod
+    //JUnitPublicProperty
     JUnitSetUpCallsSuper 
     JUnitStyleAssertions 
     JUnitTearDownCallsSuper 
-    JUnitTestMethodWithoutAssert 
+    //JUnitTestMethodWithoutAssert
     JUnitUnnecessarySetUp 
     JUnitUnnecessaryTearDown 
     JUnitUnnecessaryThrowsException 
