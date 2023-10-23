@@ -34,6 +34,7 @@ class HotelSpec extends Specification implements DomainUnitTest<Hotel> {
 
         then:
         !domain.validate(['name'])
+        domain.errors['name'].code == 'blank'
     }
 
     void 'test name can have a maximum of 255 characters'() {
