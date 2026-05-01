@@ -1,12 +1,11 @@
-# Grails Guide - Testing Domain class constraints
+# How to test Domain class constraints?
 
-This example application demonstrates how to build a test the constraints validation of a Grails app.
+This repository contains the worked sample app for the [How to test Domain class constraints?](https://grails.apache.org/guides/grails-test-domain-class-constraints/4/guide/index.html) guide on the Apache Grails site.
 
-The completed example source code can be find in the `complete` directory.
+## Run the example
 
-The published guide can be found on the [Grails Guides website](http://guides.grails.org/grails-test-domain-class-constraints/guide/index.html)
+`./gradlew bootRun`
 
-To generate this guide as HTML, clone the repository and run:
+## Maintained at apache/grails-static-website
 
-`./gradlew publishGuide`
-
+The guide narrative is maintained at https://github.com/apache/grails-static-website. Changes to the guide content go there; this repo holds the worked sample app only.
